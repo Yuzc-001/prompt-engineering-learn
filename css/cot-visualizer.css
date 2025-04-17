@@ -1,0 +1,321 @@
+/* 思维链可视化组件样式 */
+.cot-visualizer {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* 示例选择器 */
+.example-selector {
+  margin-bottom: 1rem;
+}
+
+.example-selector h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--dark-text);
+}
+
+.example-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.example-tab {
+  padding: 0.7rem 1.2rem;
+  background-color: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--medium-text);
+  transition: all 0.2s ease;
+}
+
+.example-tab:hover {
+  background-color: rgba(147, 197, 253, 0.1);
+  color: var(--primary-color);
+}
+
+.example-tab.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* 问题容器 */
+.problem-container {
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.problem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.problem-header h3 {
+  font-size: 1.1rem;
+  color: var(--dark-text);
+}
+
+.cot-controls {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.auto-play-btn, .reset-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background-color: white;
+  color: var(--medium-text);
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.auto-play-btn:hover, .reset-btn:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.auto-play-btn.playing {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.play-icon {
+  font-size: 0.8rem;
+}
+
+.problem-content {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--dark-text);
+  font-weight: 500;
+}
+
+/* 思考过程 */
+.thinking-process {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.thinking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f8fafc;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.thinking-header h3 {
+  font-size: 1.1rem;
+  color: var(--dark-text);
+}
+
+.step-progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-track {
+  width: 120px;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.step-counter {
+  font-size: 0.9rem;
+  color: var(--medium-text);
+}
+
+.current-step {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.thinking-steps {
+  padding: 1.5rem;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.thinking-step {
+  padding: 1rem 1.5rem;
+  border-left: 3px solid transparent;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  border-radius: 0 8px 8px 0;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.thinking-step.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.thinking-step.active {
+  border-left-color: var(--primary-color);
+  background-color: rgba(147, 197, 253, 0.1);
+}
+
+.thinking-step p {
+  line-height: 1.6;
+  color: var(--dark-text);
+}
+
+.thinking-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.prev-btn, .next-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.prev-btn {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  color: var(--medium-text);
+}
+
+.prev-btn:hover:not(:disabled) {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.next-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.next-btn:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+}
+
+.prev-btn:disabled, .next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 解释面板 */
+.explanation-panel {
+  padding: 1.5rem;
+  background-color: rgba(147, 197, 253, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.explanation-panel h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--dark-text);
+}
+
+.explanation-content {
+  line-height: 1.6;
+  color: var(--medium-text);
+  transition: all 0.3s ease;
+}
+
+.explanation-content.highlight {
+  color: var(--dark-text);
+  transform: scale(1.02);
+}
+
+/* 技巧部分 */
+.cot-tips {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.cot-tips h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: var(--dark-text);
+}
+
+.cot-tips ul {
+  padding-left: 1.5rem;
+}
+
+.cot-tips li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  color: var(--medium-text);
+}
+
+.cot-tips strong {
+  color: var(--dark-text);
+}
+
+/* 媒体查询 */
+@media (max-width: 768px) {
+  .cot-visualizer {
+    padding: 1.5rem;
+  }
+  
+  .problem-header, .thinking-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .step-progress {
+    align-self: stretch;
+    width: 100%;
+  }
+  
+  .progress-track {
+    flex: 1;
+  }
+  
+  .thinking-steps {
+    max-height: 300px;
+  }
+  
+  .thinking-step {
+    padding: 1rem;
+  }
+}

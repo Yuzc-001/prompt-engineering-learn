@@ -1,0 +1,535 @@
+/* 温暖活泼的主题样式 */
+
+body {
+  background-color: var(--bg-primary, #FFFAED);
+  color: #333333;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* 页面标题区域 */
+header.gradient-animate {
+  background: linear-gradient(135deg, #FF9F1C, #FF6B35, #FF5376);
+  animation: gradientAnimation 8s ease infinite;
+}
+
+/* 导航栏 */
+nav {
+  background-color: #FFFAED;
+  box-shadow: 0 4px 8px rgba(255, 107, 53, 0.1);
+}
+
+nav a {
+  color: #FF6B35;
+}
+
+nav a:hover, 
+nav a.active {
+  color: #E84D1C;
+  border-bottom: 2px solid #FF5376;
+}
+
+/* 思维链和思维树部分 */
+.technique-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.08);
+  overflow: hidden;
+  border: 1px solid #FFE0D0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.technique-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(255, 107, 53, 0.15);
+}
+
+.technique-header {
+  background: linear-gradient(135deg, #FF9F1C, #FF6B35);
+  color: white;
+  padding: 20px;
+}
+
+/* 示例区块 */
+.example-container {
+  background-color: #FFFAED;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  border-left: 4px solid #FF6B35;
+}
+
+.example-problem {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(255, 107, 53, 0.05);
+}
+
+.example-problem h4 {
+  color: #FF6B35;
+  margin-top: 0;
+}
+
+/* 思维步骤 */
+.thinking-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(255, 159, 28, 0.1);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.step:hover {
+  transform: translateY(-2px);
+}
+
+.step::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 25px;
+  width: 2px;
+  height: 10px;
+  background-color: #FFB974;
+  z-index: 1;
+}
+
+.step:last-child::after {
+  display: none;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #FF9F1C, #FF6B35);
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.step.conclusion {
+  background-color: #FFE0D0;
+  border-left: 4px solid #FF5376;
+  font-weight: 500;
+}
+
+/* 思维树样式 */
+.tot-comparison {
+  margin: 25px 0;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.08);
+}
+
+.comparison-row {
+  display: flex;
+}
+
+.comparison-row.header {
+  background: linear-gradient(135deg, #FF9F1C, #FF6B35);
+  color: white;
+  font-weight: 600;
+}
+
+.comparison-cell {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #FFE0D0;
+  display: flex;
+  align-items: center;
+}
+
+.comparison-row:not(.header):nth-child(odd) {
+  background-color: #FFFAED;
+}
+
+.comparison-row:not(.header):nth-child(even) {
+  background-color: white;
+}
+
+/* 思维树工作流程 */
+.tot-workflow {
+  background-color: #FFFAED;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.tot-step {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.tot-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 25px;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, #FF6B35, #FF9F1C);
+}
+
+.tot-step-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.tot-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.tot-path {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.08);
+  border-left: 3px solid #FFBE5C;
+  transition: all 0.2s ease;
+}
+
+.tot-path:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.12);
+}
+
+.tot-path-label {
+  display: inline-block;
+  padding: 3px 8px;
+  background-color: #FFBE5C;
+  color: #703600;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.tot-path.highlighted {
+  border-left-color: #FF6B35;
+  background-color: #FFF8F5;
+}
+
+.tot-path.success {
+  border-left-color: #28a745;
+  background-color: #F0FFF5;
+}
+
+.tot-path.faded {
+  opacity: 0.7;
+}
+
+.tot-solution {
+  background-color: #FFF3DD;
+  border-radius: 8px;
+  padding: 15px;
+  border-left: 4px solid #FF5376;
+  font-weight: 500;
+}
+
+/* 创意问题样式 */
+.tot-creative-example {
+  background-color: #FFFAED;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.tot-creative-step {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #FFB974;
+}
+
+.tot-creative-step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.tot-branches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.tot-branch {
+  flex: 1;
+  min-width: 200px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.08);
+  border-top: 3px solid #FF9F1C;
+}
+
+.tot-branch.highlighted {
+  border-top-color: #FF5376;
+  background-color: #FFF8F5;
+}
+
+.branch-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #E84D1C;
+}
+
+.tot-branch ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tot-branch li {
+  margin-bottom: 5px;
+}
+
+.tot-evaluation, 
+.tot-final-solution {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.08);
+  border-left: 3px solid #FF5376;
+}
+
+/* 可视化区域样式 */
+.config-box {
+  background: linear-gradient(135deg, #FFF3DD, #FFECE3);
+  border-radius: 12px;
+  padding: 25px;
+  margin: 30px 0;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.1);
+}
+
+.config-box h3 {
+  color: #E84D1C;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.config-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.config-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.config-item label {
+  font-weight: 600;
+  color: #E84D1C;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.config-slider {
+  flex: 1;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #FFCEB0;
+  border-radius: 4px;
+  outline: none;
+}
+
+.config-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #FF6B35;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(255, 107, 53, 0.3);
+  transition: all 0.2s ease;
+}
+
+.config-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #E84D1C;
+}
+
+.slider-value {
+  font-weight: 600;
+  color: #FF6B35;
+  min-width: 25px;
+  text-align: center;
+}
+
+.viz-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.reset-btn {
+  padding: 8px 15px;
+  background: linear-gradient(135deg, #FF6B35, #FF9F1C);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 107, 53, 0.2);
+}
+
+.viz-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 300px;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.08);
+  margin-top: 20px;
+}
+
+/* 提示部分 */
+.tot-tips {
+  margin: 30px 0;
+}
+
+.tot-tips h4 {
+  text-align: center;
+  color: #E84D1C;
+  margin-bottom: 20px;
+}
+
+.tips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.tip-item {
+  display: flex;
+  gap: 15px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.tip-item:hover {
+  transform: translateY(-5px);
+}
+
+.tip-icon {
+  font-size: 24px;
+  color: #FF6B35;
+}
+
+.tip-content h5 {
+  margin-top: 0;
+  color: #E84D1C;
+}
+
+.tip-content p {
+  margin-bottom: 0;
+  color: #555;
+}
+
+/* 动画效果 */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .tot-branches {
+    flex-direction: column;
+  }
+  
+  .tips-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 修复主内容区域可见性 */
+main {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 500px;
+}
+
+main .container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 2rem 0;
+}

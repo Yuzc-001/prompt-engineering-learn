@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="280" viewBox="0 0 500 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="500" height="280" rx="12" fill="#F8F9FA" />
+  
+  <!-- 思维链过程箭头和框 -->
+  <rect x="40" y="40" width="120" height="60" rx="8" fill="#4361EE" fill-opacity="0.1" stroke="#4361EE" stroke-width="2" />
+  <text x="100" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#4361EE">输入问题</text>
+  
+  <path d="M170 70 L205 70" stroke="#4361EE" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 4" />
+  <polygon points="205,65 215,70 205,75" fill="#4361EE" />
+  
+  <rect x="225" y="40" width="120" height="60" rx="8" fill="#4361EE" fill-opacity="0.1" stroke="#4361EE" stroke-width="2" />
+  <text x="285" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#4361EE">思考过程</text>
+  
+  <path d="M355 70 L390 70" stroke="#4361EE" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 4" />
+  <polygon points="390,65 400,70 390,75" fill="#4361EE" />
+  
+  <rect x="410" y="40" width="60" height="60" rx="8" fill="#4361EE" fill-opacity="0.1" stroke="#4361EE" stroke-width="2" />
+  <text x="440" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#4361EE">答案</text>
+  
+  <!-- 思考过程详细展示 -->
+  <rect x="50" y="130" width="400" height="120" rx="8" fill="white" stroke="#E9ECEF" stroke-width="2" />
+  
+  <rect x="70" y="150" width="30" height="30" rx="15" fill="#F72585" fill-opacity="0.1" stroke="#F72585" stroke-width="1.5" />
+  <text x="85" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#F72585">1</text>
+  <text x="115" y="170" font-family="Inter, sans-serif" font-size="13" fill="#495057">理解问题，确定所需信息</text>
+  
+  <rect x="70" y="190" width="30" height="30" rx="15" fill="#F72585" fill-opacity="0.1" stroke="#F72585" stroke-width="1.5" />
+  <text x="85" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#F72585">2</text>
+  <text x="115" y="210" font-family="Inter, sans-serif" font-size="13" fill="#495057">分解成更简单的子步骤</text>
+  
+  <rect x="260" y="150" width="30" height="30" rx="15" fill="#F72585" fill-opacity="0.1" stroke="#F72585" stroke-width="1.5" />
+  <text x="275" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#F72585">3</text>
+  <text x="305" y="170" font-family="Inter, sans-serif" font-size="13" fill="#495057">逐步解决每个子问题</text>
+  
+  <rect x="260" y="190" width="30" height="30" rx="15" fill="#F72585" fill-opacity="0.1" stroke="#F72585" stroke-width="1.5" />
+  <text x="275" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#F72585">4</text>
+  <text x="305" y="210" font-family="Inter, sans-serif" font-size="13" fill="#495057">综合结果得出最终答案</text>
+</svg>

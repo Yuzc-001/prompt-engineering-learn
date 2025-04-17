@@ -1,0 +1,633 @@
+/* 改进的技术比较页面样式 - 暖色系风格 */
+
+.techniques-overview {
+  display: none !important;
+}
+
+.technique-category {
+  flex: 1;
+  min-width: 270px;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
+  transition: transform 0.3s ease;
+  border-top: 4px solid var(--primary-color, #FF6B35);
+}
+
+.technique-category:hover {
+  transform: translateY(-5px);
+}
+
+.technique-category h3 {
+  color: var(--primary-dark, #E84D1C);
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #FFCEB0;
+  font-size: 1.3rem;
+}
+
+.technique-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.technique-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: calc(33.333% - 10px);
+  min-width: 75px;
+  background-color: #FFF8F5;
+  border-radius: 10px;
+  padding: 12px 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.08);
+}
+
+.technique-item:hover {
+  background-color: #FFE0D0;
+  transform: translateY(-3px);
+}
+
+.technique-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.technique-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.technique-item span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 比较矩阵表格样式 */
+.comparison-matrix {
+  margin: 30px 0;
+  overflow-x: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
+}
+
+.techniques-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.techniques-table th {
+  background: linear-gradient(135deg, var(--primary-color, #FF6B35), var(--secondary-color, #FF9F1C));
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.techniques-table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.techniques-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.techniques-table tr:nth-child(even) {
+  background-color: #FFF8F5;
+}
+
+.techniques-table tr:hover {
+  background-color: #FFE0D0;
+}
+
+.techniques-table td {
+  padding: 15px;
+  border-bottom: 1px solid #FFE0D0;
+  vertical-align: top;
+}
+
+.cell-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.techniques-table td ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.techniques-table td ul li {
+  margin-bottom: 5px;
+}
+
+/* 亮点标签 */
+.complexity-low,
+.tokens-low,
+.effectiveness-high {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.complexity-low {
+  background-color: #e6f7e6;
+  color: #28a745;
+}
+
+.tokens-low {
+  background-color: #e6f7f9;
+  color: #17a2b8;
+}
+
+.effectiveness-high {
+  background-color: #fff3cd;
+  color: #ff9f1c;
+}
+
+/* 案例研究部分 */
+.case-studies-container {
+  margin: 30px 0;
+}
+
+.case-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.case-tab {
+  padding: 10px 20px;
+  background-color: #FFFAED;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: #555;
+}
+
+.case-tab:hover {
+  background-color: #FFE0D0;
+}
+
+.case-tab.active {
+  background: linear-gradient(135deg, var(--primary-color, #FF6B35), var(--secondary-color, #FF9F1C));
+  color: white;
+}
+
+.case-contents {
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
+}
+
+.case-content {
+  display: none;
+}
+
+.case-content:first-child {
+  display: block;
+}
+
+.techniques-comparison {
+  margin-bottom: 30px;
+}
+
+.comparison-item {
+  border: 1px solid #FFE0D0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-color: white;
+  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.05);
+}
+
+.comparison-header {
+  background-color: #FFF8F5;
+  padding: 15px;
+  border-bottom: 1px solid #FFE0D0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comparison-title {
+  font-weight: 600;
+  color: var(--primary-dark, #E84D1C);
+  margin: 0;
+}
+
+.comparison-body {
+  padding: 20px;
+}
+
+.prompt-output-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.prompt-box, 
+.result-box {
+  background-color: #FFFAED;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.prompt-label,
+.result-label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--primary-dark, #E84D1C);
+}
+
+/* 技术选择器样式 */
+.technique-chooser {
+  background: linear-gradient(135deg, #FFF3DD, #FFECE3);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 30px 0;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.1);
+}
+
+.chooser-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.question h3 {
+  color: var(--primary-dark, #E84D1C);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.option {
+  flex: 1;
+  min-width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.08);
+}
+
+.option:hover {
+  background-color: #FFF8F5;
+  transform: translateY(-2px);
+}
+
+.option input {
+  margin: 0;
+}
+
+.option span {
+  font-size: 0.95rem;
+}
+
+.get-recommendation-btn {
+  align-self: center;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, var(--primary-color, #FF6B35), var(--secondary-color, #FF9F1C));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.get-recommendation-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2);
+}
+
+.recommendation-result {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.1);
+}
+
+.recommendation-result h3 {
+  color: var(--primary-dark, #E84D1C);
+  margin-top: 0;
+  border-bottom: 2px dashed #FFCEB0;
+  padding-bottom: 10px;
+}
+
+.recommended-techniques {
+  margin-top: 20px;
+}
+
+.recommended-technique {
+  background-color: #FFF8F5;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.08);
+}
+
+.recommendation-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.recommendation-details {
+  flex: 1;
+}
+
+.recommendation-details h4 {
+  color: var(--primary-dark, #E84D1C);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.recommendation-details p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.recommendation-reason {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+/* 新的技术卡片网格布局 */
+.techniques-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 30px !important;
+  margin: 30px 0 !important;
+}
+
+.technique-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  border-top: 4px solid transparent;
+  border-image: linear-gradient(to right, var(--primary-color, #FF6B35), var(--secondary-color, #FF9F1C));
+  border-image-slice: 1;
+}
+
+.technique-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(255, 107, 53, 0.15);
+}
+
+.highlight-card {
+  box-shadow: 0 10px 25px rgba(255, 83, 118, 0.2);
+  border-top: 4px solid transparent;
+  border-image: linear-gradient(to right, var(--accent-color, #FF5376), var(--primary-color, #FF6B35));
+  border-image-slice: 1;
+  position: relative;
+}
+
+.highlight-card::before {
+  content: "热门推荐" !important;
+  display: block !important;
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: var(--accent-color, #FF5376);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(255, 83, 118, 0.3);
+  z-index: 10;
+}
+
+.technique-card-header {
+  padding: 20px;
+  background: linear-gradient(145deg, #FFF8F5, #FFF5EC);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #FFE0D0;
+}
+
+.technique-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.1);
+}
+
+.technique-card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.technique-card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--primary-dark, #E84D1C);
+  flex: 1;
+}
+
+.technique-card-content {
+  padding: 20px;
+}
+
+.technique-card-content p {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.technique-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.tag-complexity-low {
+  background-color: #2ECC71;
+}
+
+.tag-complexity-med {
+  background-color: #3498DB;
+}
+
+.tag-complexity-high {
+  background-color: #F39C12;
+}
+
+.tag-complexity-very-high {
+  background-color: #E74C3C;
+}
+
+.tag-tokens-low {
+  background-color: #2ECC71;
+}
+
+.tag-tokens-med {
+  background-color: #3498DB;
+}
+
+.tag-tokens-high {
+  background-color: #F39C12;
+}
+
+.tag-tokens-very-high {
+  background-color: #E74C3C;
+}
+
+.tag-effectiveness-high {
+  background-color: #9B59B6;
+}
+
+.tag-effectiveness-very-high {
+  background-color: #8E44AD;
+}
+
+.technique-card-use-cases {
+  background-color: #FFF8F5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.technique-card-use-cases h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--primary-dark, #E84D1C);
+  font-size: 1rem;
+}
+
+.technique-card-use-cases ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.technique-card-use-cases li {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.technique-card-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.learn-more-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, var(--primary-color, #FF6B35), var(--secondary-color, #FF9F1C));
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.15);
+}
+
+.learn-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.25);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .techniques-overview {
+    flex-direction: column;
+  }
+  
+  .technique-item {
+    width: calc(50% - 10px);
+  }
+  
+  .case-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+  }
+  
+  .case-tab {
+    flex: 0 0 auto;
+  }
+  
+  .comparison-body {
+    overflow-x: auto;
+  }
+  
+  .techniques-grid {
+    grid-template-columns: 1fr;
+  }
+}
