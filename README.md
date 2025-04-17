@@ -91,7 +91,7 @@
 
 ### 在线体验
 
-访问我们的[在线演示网站](https://prompt-engineering-learn-new.windsurf.build)，无需安装，立即开始学习！
+访问我们的[在线演示网站](https://prompt-engineering-learn-new.windsurf.build/)，无需安装，立即开始学习！
 
 ### 本地部署
 
