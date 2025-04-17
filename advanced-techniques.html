@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高级提示词技术 - Prompt Engineering Guide</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/tot-visualizer.css">
+  <link rel="stylesheet" href="css/styles-new.css">
+  <link rel="stylesheet" href="css/warm-theme.css">
+  <link rel="stylesheet" href="css/tot-explanation.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="gradient-animate">
+    <div class="container">
+      <h1 class="typewriter">高级提示词技术</h1>
+      <p class="fade-in">掌握更复杂、更强大的提示词工程方法</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section id="intro" class="animate-on-scroll visible">
+        <h2>高级提示词技术介绍</h2>
+        <p>随着大语言模型能力的不断提升，研究人员和工程师开发了多种高级提示词技术，以解决更复杂的问题。这些技术超越了基础提示方法，通过引导模型进行深入思考、探索多个可能性、结合思考与行动，显著提高了模型的推理能力和准确性。</p>
+        
+        <div class="info-card">
+          <p>本页面将介绍以下高级提示词技术：</p>
+          <ul class="check-list">
+            <li><strong>思维树 (Tree of Thoughts)</strong> - 引导模型沿多条思维路径同时探索</li>
+            <li><strong>反思与行动 (ReAct)</strong> - 整合推理与行动的交互式框架</li>
+            <li><strong>自洽性检查 (Self-Consistency)</strong> - 通过多次生成答案并取众数提高准确性</li>
+            <li><strong>步退提示 (Step-Back Prompting)</strong> - 引导模型先抽象思考再解决具体问题</li>
+            <li><strong>自动提示工程 (Automatic Prompt Engineering)</strong> - 用AI优化提示词</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 思维树部分 -->
+      <section id="tot" class="animate-on-scroll visible">
+        <h2>思维树 (Tree of Thoughts)</h2>
+        <p>思维树（Tree of Thoughts，ToT）是思维链（Chain of Thought）技术的扩展，它允许大语言模型沿着多条思维路径同时进行探索和推理。这种方法模拟了人类解决复杂问题时的思考过程：探索多个可能的解决方案，并在必要时回溯重新思考。</p>
+        
+        <div class="technique-card">
+          <div class="technique-header">
+            <div class="technique-icon">
+              <img src="img/tot-icon.svg" alt="Tree of Thoughts 图标">
+            </div>
+            <h3>思维树的工作原理</h3>
+          </div>
+          <div class="technique-content">
+            <p>思维树通过以下关键步骤工作：</p>
+            <ol>
+              <li><strong>思考步骤拆分</strong>：将复杂问题分解为多个思考步骤</li>
+              <li><strong>思维路径生成</strong>：在每个步骤生成多个可能的思考方向</li>
+              <li><strong>评估与选择</strong>：评估每条路径的有效性，保留最有前途的路径</li>
+              <li><strong>递归探索</strong>：对最有前途的路径继续深入探索</li>
+              <li><strong>最终决策</strong>：基于最完整的思维路径得出结论</li>
+            </ol>
+            
+            <div class="tot-comparison">
+              <h4>与思维链(CoT)的关键区别</h4>
+              <div class="comparison-table">
+                <div class="comparison-row header">
+                  <div class="comparison-cell">特性</div>
+                  <div class="comparison-cell">思维链 (CoT)</div>
+                  <div class="comparison-cell">思维树 (ToT)</div>
+                </div>
+                <div class="comparison-row">
+                  <div class="comparison-cell">思考路径</div>
+                  <div class="comparison-cell">单一线性路径</div>
+                  <div class="comparison-cell">多条并行路径</div>
+                </div>
+                <div class="comparison-row">
+                  <div class="comparison-cell">回溯能力</div>
+                  <div class="comparison-cell">有限或没有</div>
+                  <div class="comparison-cell">可以回溯并探索替代路径</div>
+                </div>
+                <div class="comparison-row">
+                  <div class="comparison-cell">适用场景</div>
+                  <div class="comparison-cell">问题有明确步骤</div>
+                  <div class="comparison-cell">问题有多种解决途径</div>
+                </div>
+                <div class="comparison-row">
+                  <div class="comparison-cell">计算复杂度</div>
+                  <div class="comparison-cell">较低</div>
+                  <div class="comparison-cell">较高</div>
+                </div>
+                <div class="comparison-row">
+                  <div class="comparison-cell">优势领域</div>
+                  <div class="comparison-cell">数学计算、逻辑推理</div>
+                  <div class="comparison-cell">游戏策略、创意问题</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tot-detail-section">
+              <h4>实现思维树的核心组件</h4>
+              <div class="tot-components">
+                <div class="tot-component">
+                  <h5>1. 思考生成器</h5>
+                  <p>这个组件负责在每个步骤生成多个可能的思考。例如，在解决谜题时，它会生成几种不同的解题策略或可能的下一步动作。</p>
+                </div>
+                <div class="tot-component">
+                  <h5>2. 状态评估器</h5>
+                  <p>评估每个思考状态的价值或有效性。例如，判断某条解题路径是否有希望达到正确答案，或者某种策略是否可能导致死胡同。</p>
+                </div>
+                <div class="tot-component">
+                  <h5>3. 搜索算法</h5>
+                  <p>决定如何在思维树中探索。常见的搜索策略包括：</p>
+                  <ul>
+                    <li><strong>广度优先搜索(BFS)</strong>：适合可能有多个有效解的问题</li>
+                    <li><strong>深度优先搜索(DFS)</strong>：适合需要深入推理的问题</li>
+                    <li><strong>最佳优先搜索</strong>：结合评估器选择最有希望的路径优先探索</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tot-detail-section">
+              <h4>思维树可视化演示</h4>
+              <div id="tot-viz" class="tot-visualizer">
+                <div class="tot-controls">
+                  <div class="tot-tabs">
+                    <button class="tot-tab active" data-example="0">24点游戏</button>
+                    <button class="tot-tab" data-example="1">逻辑谜题</button>
+                  </div>
+                  <div class="tot-problem">
+                    <div class="tot-problem-label">问题描述:</div>
+                    <div class="tot-problem-content"></div>
+                  </div>
+                  <div class="tot-config">
+                    <div class="tot-config-item">
+                      <label for="branchFactor">分支因子:</label>
+                      <input type="range" id="branchFactor" min="1" max="5" value="2" class="config-slider">
+                      <span class="config-value">2</span>
+                    </div>
+                    <div class="tot-config-item">
+                      <label for="treeDepth">树深度:</label>
+                      <input type="range" id="treeDepth" min="1" max="5" value="3" class="config-slider">
+                      <span class="config-value">3</span>
+                    </div>
+                    <div class="tot-config-item tot-checkbox">
+                      <input type="checkbox" id="autoExpand">
+                      <label for="autoExpand">自动展开所有节点</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="tot-tree-container"></div>
+              </div>
+            </div>
+            
+            <div class="example">
+              <h4>实例1：24点游戏解决</h4>
+              <p class="problem-statement">使用数字4、9、10、13和四则运算，计算得到24。</p>
+              
+              <div class="tot-workflow">
+                <div class="tot-step">
+                  <div class="tot-step-header">
+                    <span class="tot-step-number">1</span>
+                    <h5>生成初始思考路径</h5>
+                  </div>
+                  <div class="tot-paths">
+                    <div class="tot-path">
+                      <span class="tot-path-label">路径A</span>
+                      <p>尝试先计算4 + 9 = 13，然后结合10和13</p>
+                    </div>
+                    <div class="tot-path">
+                      <span class="tot-path-label">路径B</span>
+                      <p>尝试先计算13 - 10 = 3，然后结合4和9</p>
+                    </div>
+                    <div class="tot-path">
+                      <span class="tot-path-label">路径C</span>
+                      <p>尝试先计算10 × 4 = 40，然后结合9和13</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tot-step">
+                  <div class="tot-step-header">
+                    <span class="tot-step-number">2</span>
+                    <h5>评估并扩展有希望的路径</h5>
+                  </div>
+                  <div class="tot-paths">
+                    <div class="tot-path faded">
+                      <span class="tot-path-label">路径A</span>
+                      <p>4 + 9 = 13, 13 + 10 = 23, 23 ≠ 24 ❌</p>
+                      <p>4 + 9 = 13, 13 × 10 = 130, 130 ≠ 24 ❌</p>
+                    </div>
+                    <div class="tot-path highlighted">
+                      <span class="tot-path-label">路径B</span>
+                      <p>13 - 10 = 3, 3 × 9 = 27, 27 ≠ 24 ❌</p>
+                      <p>13 - 10 = 3, 3 × 8 = 24 ✓</p>
+                      <p class="tot-problem">但我们没有8，只有4和9</p>
+                    </div>
+                    <div class="tot-path">
+                      <span class="tot-path-label">路径C</span>
+                      <p>10 × 4 = 40, 40 - 13 = 27, 27 ≠ 24 ❌</p>
+                      <p>10 × 4 = 40, 40 - 9 - 13 = 18, 18 ≠ 24 ❌</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tot-step">
+                  <div class="tot-step-header">
+                    <span class="tot-step-number">3</span>
+                    <h5>生成新路径，回溯探索</h5>
+                  </div>
+                  <div class="tot-paths">
+                    <div class="tot-path">
+                      <span class="tot-path-label">路径D</span>
+                      <p>思考：13 和 9...如果 13 ÷ 9 ≈ 1.44，不是整数不太方便</p>
+                      <p>如果 9 - 4 = 5, 5 × 10 = 50, 50 - 13 = 37 ≠ 24 ❌</p>
+                    </div>
+                    <div class="tot-path highlighted success">
+                      <span class="tot-path-label">路径E</span>
+                      <p>先构建8：9 - 1 = 8，需要从13或10中得到1</p>
+                      <p>13 = 10 + 3，所以 10 - (13 - 10) = 10 - 3 = 7</p>
+                      <p>构建不出8，换个思路</p>
+                      <p>考虑：(9 - 4) × (13 - 10) = 5 × 3 = 15 ≠ 24 ❌</p>
+                      <p>最后尝试：(13 - 9) × 10 - 4 = 4 × 10 - 4 = 40 - 4 = 36 ≠ 24 ❌</p>
+                      <p>再尝试：(13 - 9) × (10 - 4) = 4 × 6 = 24 ✓</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tot-step">
+                  <div class="tot-step-header">
+                    <span class="tot-step-number">4</span>
+                    <h5>确认最终解决方案</h5>
+                  </div>
+                  <div class="tot-solution">
+                    <p>最终答案：(13 - 9) × (10 - 4) = 4 × 6 = 24</p>
+                    <p>路径E成功找到了有效解。这个例子很好地展示了思维树如何探索多条路径，并在遇到死胡同时回溯尝试新方法。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="example">
+              <h4>实例2：创意写作问题</h4>
+              <p class="problem-statement">为一款旨在减少塑料使用的新型可重复使用水瓶创作一个引人注目的产品名称和广告语。</p>
+              
+              <div class="tot-creative-example">
+                <div class="tot-creative-step">
+                  <h5>第一步：生成多个潜在名称方向</h5>
+                  <div class="tot-branches">
+                    <div class="tot-branch">
+                      <span class="branch-label">方向1: 环保强调</span>
+                      <ul>
+                        <li>EcoFlow</li>
+                        <li>GreenSip</li>
+                        <li>PlanetPure</li>
+                      </ul>
+                    </div>
+                    <div class="tot-branch">
+                      <span class="branch-label">方向2: 创新/技术感</span>
+                      <ul>
+                        <li>InfiniBottle</li>
+                        <li>NeoHydrate</li>
+                        <li>AquaTech</li>
+                      </ul>
+                    </div>
+                    <div class="tot-branch">
+                      <span class="branch-label">方向3: 情感/生活方式</span>
+                      <ul>
+                        <li>PureJourney</li>
+                        <li>EverDrop</li>
+                        <li>SoulStream</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tot-creative-step">
+                  <h5>第二步：评估并选择最佳名称</h5>
+                  <div class="tot-evaluation">
+                    <p>对比关键标准：记忆度、传达可持续性、与目标受众共鸣</p>
+                    <p><strong>结果：</strong> "EverDrop"和"InfiniBottle"评分最高</p>
+                    <p><strong>选择：</strong> "EverDrop" - 既提示可持续性，又有情感联系</p>
+                  </div>
+                </div>
+                
+                <div class="tot-creative-step">
+                  <h5>第三步：为选定名称生成广告语方向</h5>
+                  <div class="tot-branches">
+                    <div class="tot-branch">
+                      <span class="branch-label">环保影响</span>
+                      <ul>
+                        <li>"每一滴都计数，每一瓶都重要"</li>
+                        <li>"一瓶永续，千瓶不废"</li>
+                      </ul>
+                    </div>
+                    <div class="tot-branch">
+                      <span class="branch-label">用户便利</span>
+                      <ul>
+                        <li>"随时随地，永不干涸"</li>
+                        <li>"生活之源，永不枯竭"</li>
+                      </ul>
+                    </div>
+                    <div class="tot-branch highlighted">
+                      <span class="branch-label">双重意义</span>
+                      <ul>
+                        <li>"永续之源，生生不息"</li>
+                        <li>"一瓶在手，源源不断"</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tot-creative-step">
+                  <h5>最终选择与组合:</h5>
+                  <div class="tot-final-solution">
+                    <p><strong>产品名称:</strong> EverDrop</p>
+                    <p><strong>广告语:</strong> "永续之源，生生不息"</p>
+                    <p>这个组合成功地传达了产品的持久性和环保理念，同时还具有情感共鸣。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tot-visualization-section">
+              <h4>思维树可视化</h4>
+              <p>下面的交互式可视化展示了如何通过思维树方法探索多条思考路径。您可以调整分支因子和树深度来查看不同配置的思维树。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="big-card highlight-card">
+          <h3>思维树(ToT)详细讲解</h3>
+          <div class="concept-explanation">
+            <p><strong>思维树(Tree of Thoughts)</strong>是一种高级提示技术，于2023年由普林斯顿大学和谷歌DeepMind的研究人员提出。它扩展了思维链(CoT)方法，使大语言模型能够探索多条思维路径，创建一个"思考树"，而不是单一的思考链。</p>
+            
+            <h4>核心概念</h4>
+            <p>思维树技术的关键创新在于：</p>
+            <ol>
+              <li><strong>多路径探索</strong>：同时考虑多个可能的推理路径</li>
+              <li><strong>回溯能力</strong>：当一条路径不可行时，能够返回并尝试其他路径</li>
+              <li><strong>评估机制</strong>：对不同推理分支的质量进行评估，选择最佳路径</li>
+              <li><strong>自我反思</strong>：通过在不同思考层次间移动来优化解决方案</li>
+            </ol>
+            
+            <h4>与思维链(CoT)的比较</h4>
+            <div class="comparison-table">
+              <table>
+                <tr>
+                  <th>特性</th>
+                  <th>思维链(CoT)</th>
+                  <th>思维树(ToT)</th>
+                </tr>
+                <tr>
+                  <td>探索路径</td>
+                  <td>单一线性路径</td>
+                  <td>多条并行路径</td>
+                </tr>
+                <tr>
+                  <td>错误处理</td>
+                  <td>无法回溯，一旦出错可能导致整体失败</td>
+                  <td>能够回溯，尝试不同路径</td>
+                </tr>
+                <tr>
+                  <td>适用任务</td>
+                  <td>明确步骤的线性问题</td>
+                  <td>有多种可能解法的复杂问题</td>
+                </tr>
+                <tr>
+                  <td>计算成本</td>
+                  <td>中等</td>
+                  <td>较高（搜索空间更大）</td>
+                </tr>
+                <tr>
+                  <td>实现复杂度</td>
+                  <td>简单</td>
+                  <td>复杂（需要状态管理和评估）</td>
+                </tr>
+              </table>
+            </div>
+            
+            <h4>思维树工作原理</h4>
+            <div class="workflow-diagram">
+              <ol class="workflow-steps">
+                <li>
+                  <h5>步骤1：问题分解</h5>
+                  <p>将复杂问题分解为需要多个思考步骤解决的问题。例如，解决24点游戏需要多步算术运算。</p>
+                </li>
+                <li>
+                  <h5>步骤2：生成思考</h5>
+                  <p>在每一步，生成多个可能的"思考"（中间思考状态），而不是单一的想法。</p>
+                </li>
+                <li>
+                  <h5>步骤3：评估思考</h5>
+                  <p>使用值估计函数（可以是另一个LLM实例）评估每个思考的价值或前景。</p>
+                </li>
+                <li>
+                  <h5>步骤4：搜索策略</h5>
+                  <p>使用搜索算法（如广度优先、深度优先或最佳优先）来探索思考树。</p>
+                </li>
+                <li>
+                  <h5>步骤5：解决问题</h5>
+                  <p>通过探索思考树找到最佳解决方案。</p>
+                </li>
+              </ol>
+            </div>
+            
+            <h4>技术实现</h4>
+            <p>思维树的实现通常涉及以下组件：</p>
+            <ol>
+              <li><strong>思考生成器</strong>：生成每一步可能的思考</li>
+              <li><strong>思考评估器</strong>：评估每个思考的价值</li>
+              <li><strong>搜索算法</strong>：探索思考空间的策略</li>
+              <li><strong>状态管理</strong>：管理和存储不同思考路径</li>
+            </ol>
+            
+            <div class="code-example">
+              <h5>思维树提示示例</h5>
+              <pre><code>我需要你使用思维树方法解决以下问题。在每一步，考虑多个可能的路径，评估每条路径的可行性，并在必要时回溯尝试不同路径。
+
+问题：使用数字4, 5, 6, 7，通过加、减、乘、除运算得到24。
+
+请按以下格式回答：
+1. 列出所有可能的起始组合（至少3种不同方式）
+2. 对每种组合，探索至少2条不同路径
+3. 当路径失败时，回溯并尝试新路径
+4. 当找到有效解决方案时，完整说明步骤</code></pre>
+            </div>
+            
+            <h4>应用场景</h4>
+            <p>思维树技术特别适合以下场景：</p>
+            <ul>
+              <li><strong>游戏求解</strong>：如数学游戏、逻辑谜题</li>
+              <li><strong>创意写作</strong>：探索多个情节发展路径</li>
+              <li><strong>复杂规划</strong>：需要考虑多种可能性的规划任务</li>
+              <li><strong>决策分析</strong>：评估多个决策路径的影响</li>
+              <li><strong>问题解决</strong>：有多种解决方法的复杂问题</li>
+            </ul>
+            
+            <h4>优势与局限性</h4>
+            <div class="pros-cons">
+              <div class="pros">
+                <h5>优势</h5>
+                <ul>
+                  <li>能够处理更复杂、更开放的问题</li>
+                  <li>提高解决问题的准确性</li>
+                  <li>允许探索创意解决方案</li>
+                  <li>具有错误恢复能力</li>
+                </ul>
+              </div>
+              <div class="cons">
+                <h5>局限性</h5>
+                <ul>
+                  <li>计算成本高（需要多次模型调用）</li>
+                  <li>实现复杂度高</li>
+                  <li>搜索空间可能爆炸性增长</li>
+                  <li>对简单问题可能过度复杂化</li>
+                </ul>
+              </div>
+            </div>
+            
+            <h4>研究进展</h4>
+            <p>自2023年提出以来，思维树技术已经在多个领域展示了其优势：</p>
+            <ul>
+              <li>解决需要规划和推理的复杂问题，如24点游戏、创意写作和BIG-Bench Hard任务</li>
+              <li>在需要回溯的任务上显著优于思维链方法</li>
+              <li>在大型语言模型上表现优于使用简单提示或思维链方法</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="config-box">
+          <h3>思维树参数配置</h3>
+          <div class="config-controls">
+            <div class="config-item">
+              <label>树宽度:</label>
+              <div class="slider-container">
+                <input type="range" min="1" max="4" value="2" id="branch-factor" class="config-slider">
+                <span class="slider-value">2</span>
+              </div>
+              <p class="config-desc">控制每个节点的分支数量，影响思考探索的广度</p>
+            </div>
+            
+            <div class="config-item">
+              <label>树深度:</label>
+              <div class="slider-container">
+                <input type="range" min="1" max="4" value="3" id="tree-depth" class="config-slider">
+                <span class="slider-value">3</span>
+              </div>
+              <p class="config-desc">控制思考路径的层数，影响推理的深度</p>
+            </div>
+            
+            <div class="config-item viz-controls">
+              <label class="checkbox-label">
+                <input type="checkbox" id="auto-expand"> 自动展开所有节点
+              </label>
+              <button class="reset-btn" id="reset-tree">重置树</button>
+            </div>
+            
+            <div id="tot-viz" class="viz-container">
+              <!-- 这里将由JavaScript渲染思维树可视化 -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="tot-tips">
+          <h4>使用思维树技术的实用技巧</h4>
+          <div class="tips-container">
+            <div class="tip-item">
+              <div class="tip-icon">💡</div>
+              <div class="tip-content">
+                <h5>明确评估标准</h5>
+                <p>给模型提供清晰的标准来评估每条思维路径的有效性，这有助于筛选掉无效路径。</p>
+              </div>
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon">📌</div>
+              <div class="tip-content">
+                <h5>控制思维树规模</h5>
+                <p>通过限制分支数和深度来保持思维树的可管理性，过大的树会导致计算资源过度消耗。</p>
+              </div>
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon">🔄</div>
+              <div class="tip-content">
+                <h5>允许适当回溯</h5>
+                <p>鼓励模型在遇到死胡同时回溯到之前的决策点，重新探索其他可能性。</p>
+              </div>
+            </div>
+            <div class="tip-item">
+              <div class="tip-icon">🎯</div>
+              <div class="tip-content">
+                <h5>任务匹配</h5>
+                <p>思维树特别适合具有多种解决路径的问题，如创意任务、游戏策略或复杂决策问题。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ReAct部分 -->
+      <section id="react" class="animate-on-scroll visible">
+        <h2>反思与行动 (ReAct)</h2>
+        <p>ReAct（Reasoning + Acting）是一种将推理和行动结合在一起的高级提示词技术，使大语言模型能够通过交互式推理解决复杂问题。这种方法允许模型在生成思考的同时采取行动（比如搜索信息或使用工具），使模型能够处理更广泛的实际应用场景。</p>
+        
+        <div class="technique-card">
+          <div class="technique-header">
+            <div class="technique-icon">
+              <img src="img/react-icon.svg" alt="ReAct 图标">
+            </div>
+            <h3>ReAct技术核心</h3>
+          </div>
+          <div class="technique-content">
+            <p>ReAct结合了思维链（Chain-of-Thought）的推理能力和与环境交互的能力，其关键组成部分包括：</p>
+            <ul>
+              <li><strong>Thought</strong>：模型对当前情况进行分析和推理</li>
+              <li><strong>Action</strong>：基于推理采取的行动（如搜索信息、使用工具等）</li>
+              <li><strong>Observation</strong>：从行动中获取的信息或反馈</li>
+              <li><strong>循环迭代</strong>：基于新观察结果继续思考和行动，直到解决问题</li>
+            </ul>
+            
+            <div class="example">
+              <h4>示例：使用ReAct回答事实性问题</h4>
+              <pre class="prompt-box">问题：谁是《哈利·波特》系列的作者，她出生于哪一年？
+
+Thought: 这个问题有两部分：(1)《哈利·波特》系列的作者是谁，(2)这位作者出生于哪一年。我需要找到这两个信息。我知道《哈利·波特》系列的作者是J.K.罗琳（J.K. Rowling），现在我需要确认她的出生年份。
+
+Action: 搜索"J.K. Rowling出生年份"
+
+Observation: J.K. Rowling，全名Joanne Kathleen Rowling，出生于1965年7月31日。
+
+Thought: 现在我有了所有需要的信息。《哈利·波特》系列的作者是J.K. Rowling，她出生于1965年。
+
+Action: 完成回答
+
+答案：《哈利·波特》系列的作者是J.K. Rowling（琼·罗琳），她出生于1965年。</pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="prompt-example-item">
+          <div class="prompt-example-header">
+            <h4>ReAct提示词模板</h4>
+            <span class="prompt-example-label">模板</span>
+          </div>
+          <div class="prompt-container">
+            <div class="prompt-input">我希望你使用ReAct（Reasoning and Acting）方法来解决问题。对于每个步骤，你应该：
+
+1. Thought: 思考当前情况、需要了解的信息和可能的解决方案
+2. Action: 指定一个行动（如搜索信息、使用工具、执行计算等）
+3. Observation: 描述从行动中获得的结果或观察
+4. 重复上述步骤直到找到答案
+5. 最后，提供最终答案
+
+问题：[问题描述]</div>
+            <div class="prompt-output">Thought: [对问题的初步分析]
+
+Action: [第一个行动，如搜索特定信息]
+
+Observation: [行动后获得的信息]
+
+Thought: [基于新观察结果的进一步思考]
+
+Action: [下一个行动]
+
+Observation: [第二个行动的结果]
+
+...
+
+Thought: [最终分析]
+
+答案: [最终解答]</div>
+          </div>
+          <div class="prompt-note">
+            <strong>适用场景：</strong> ReAct技术特别适合需要获取事实信息、规划多步骤任务、与系统或API交互的场景。通过结合推理和行动，模型能够获取必要信息并应用于问题解决中。
+          </div>
+        </div>
+      </section>
+      
+      <!-- 自洽性检查部分 -->
+      <section id="self-consistency" class="animate-on-scroll visible">
+        <h2>自洽性检查 (Self-Consistency)</h2>
+        <p>自洽性检查是一种提高思维链（Chain-of-Thought）准确性的技术，通过让模型生成多条不同的推理路径，然后采用"多数表决"的方式来确定最终答案。这种方法可以显著提高模型在数学推理、逻辑推理和事实判断等任务上的表现。</p>
+        
+        <div class="technique-card">
+          <div class="technique-header">
+            <div class="technique-icon">
+              <img src="img/cot-icon.svg" alt="Self-Consistency 图标">
+            </div>
+            <h3>自洽性检查原理</h3>
+          </div>
+          <div class="technique-content">
+            <p>自洽性检查的工作原理是：</p>
+            <ol>
+              <li>对同一问题生成多条独立的思维链</li>
+              <li>每条思维链可能会得到不同的答案</li>
+              <li>统计所有思维链得出的答案</li>
+              <li>选择出现频率最高的答案作为最终结果</li>
+            </ol>
+            
+            <div class="example">
+              <h4>示例：数学问题解决</h4>
+              <pre class="prompt-box">问题：一列火车以每小时60公里的速度行驶。如果火车长250米，需要多少秒才能完全通过一个长500米的隧道？
+
+思路1：
+首先，我需要计算火车从进入隧道到完全离开隧道所经过的总距离。
+总距离 = 隧道长度 + 火车长度 = 500米 + 250米 = 750米
+然后，我需要将这个距离转换为秒数。
+火车速度是60公里/小时 = 60000米/3600秒 = 16.67米/秒
+通过时间 = 总距离 / 速度 = 750米 / 16.67米/秒 ≈ 45秒
+
+思路2：
+在这个问题中，我需要找出火车完全通过隧道所需的时间。
+从火车头进入隧道到火车尾离开隧道的总距离是：隧道长度 + 火车长度 = 500米 + 250米 = 750米
+火车速度是60公里/小时，转换为米/秒：
+60公里/小时 = 60 * 1000 / 3600 = 16.67米/秒
+所以，通过时间 = 750米 / 16.67米/秒 = 45秒
+
+思路3：
+我们可以这样思考：当火车头刚进入隧道时，火车尾在距隧道入口250米之外。当火车尾进入隧道时，火车头已经在隧道内行驶了250米。当火车头离开隧道时，火车尾还有250米才能离开隧道。
+因此，火车完全通过隧道的总距离是隧道长度加上火车长度：500 + 250 = 750米。
+以60公里/小时的速度，转换为米/秒是16.67米/秒。
+时间 = 距离/速度 = 750 / 16.67 = 45秒
+
+答案统计：
+45秒：3票
+最终答案：45秒</pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="prompt-example-item">
+          <div class="prompt-example-header">
+            <h4>自洽性检查提示词模板</h4>
+            <span class="prompt-example-label">模板</span>
+          </div>
+          <div class="prompt-container">
+            <div class="prompt-input">请使用自洽性检查方法解决以下问题。生成[样本数量]个不同的推理路径，然后根据多数结果确定最终答案。
+
+问题：[问题描述]
+
+请按以下格式输出：
+思路1：
+[详细的推理过程]
+答案：[结论]
+
+思路2：
+[详细的推理过程]
+答案：[结论]
+
+...
+
+答案统计：
+[答案1]：[出现次数]票
+[答案2]：[出现次数]票
+...
+
+最终答案：[多数表决结果]</div>
+            <div class="prompt-output">[这里将显示模型按照指定格式生成多条推理路径，并通过多数表决确定最终答案]</div>
+          </div>
+          <div class="prompt-note">
+            <strong>效果提升：</strong> 研究表明，相比单一思维链，自洽性检查方法在数学推理任务上可将准确率提高10-15个百分点，尤其适合具有明确答案的问题。
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-section">
+              <h3>关于本项目</h3>
+              <p>提示词工程学习网站是一个开源教育项目，旨在帮助人们学习和掌握提示词设计技术。</p>
+              <p>该项目基于Prompt Engineering指南创建，专注于提供交互式学习体验。</p>
+            </div>
+            <div class="footer-section">
+              <h3>相关资源</h3>
+              <ul>
+                <li><a href="https://github.com/Yuzc-001/prompt-engineering-learn" target="_blank">GitHub 仓库</a></li>
+                <li><a href="chain-of-thought.html">思维链详解</a></li>
+                <li><a href="techniques-comparison.html">技术比较页面</a></li>
+                <li><a href="advanced-techniques.html#tot">思维树详解</a></li>
+                <li><a href="contribute.html">贡献指南</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <h3>联系我们</h3>
+              <p>如有任何问题或建议，请在GitHub上提交Issue或Pull Request。</p>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2025 Prompt Engineering Learn | MIT License</p>
+          </div>
+        </div>
+      </footer>
+
+      <script src="js/script.js"></script>
+      <script src="js/animations.js"></script>
+      <script src="js/tot-visualizer.js"></script>
+      <script>
+        // 确保DOM完全加载后执行
+        document.addEventListener('DOMContentLoaded', function() {
+          console.log('高级技术页面DOM已加载');
+          
+          // 强制显示主内容
+          const mainElement = document.querySelector('main');
+          if (mainElement) {
+            mainElement.style.display = 'block';
+            mainElement.style.visibility = 'visible';
+            mainElement.style.opacity = '1';
+            console.log('主内容强制显示成功');
+          }
+          
+          // 确保所有部分可见
+          const sections = document.querySelectorAll('section');
+          sections.forEach(function(section, index) {
+            section.classList.add('visible');
+            section.style.display = 'block';
+            section.style.visibility = 'visible';
+            section.style.opacity = '1';
+            console.log('部分 ' + index + ' 强制显示成功');
+          });
+          
+          // 确保可视化器初始化
+          const totViz = document.getElementById('tot-viz');
+          if (totViz) {
+            console.log('ToT可视化容器存在，确保显示');
+            totViz.style.display = 'block';
+            totViz.style.minHeight = '300px';
+            
+            // 尝试初始化可视化器
+            try {
+              if (typeof ToTVisualizer !== 'undefined') {
+                const viz = new ToTVisualizer(totViz);
+                viz.initialize();
+                console.log('ToT可视化器初始化成功');
+              } else {
+                console.error('找不到ToT可视化器类');
+              }
+            } catch (e) {
+              console.error('ToT可视化器初始化失败:', e);
+            }
+          } else {
+            console.warn('找不到ToT可视化容器');
+          }
+          
+          // 绑定滑块事件
+          const sliders = document.querySelectorAll('.config-slider');
+          sliders.forEach(slider => {
+            slider.addEventListener('input', function() {
+              const value = this.value;
+              this.nextElementSibling.textContent = value;
+            });
+          });
+        });
+      </script>
+    </div>
+  </main>
+</body>
+</html>

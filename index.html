@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Engineering Guide</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="gradient-animate">
+    <div class="container">
+      <h1 class="typewriter">Prompt Engineering Guide</h1>
+      <p class="fade-in">学习如何设计高质量提示词以指导大语言模型产生准确输出</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      
+      <section id="basic" class="animate-on-scroll">
+        <h2>基础提示技术</h2>
+        
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/zero-shot-icon.svg" alt="Zero-shot icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>零样本提示 (Zero-shot)</h3>
+            <p>不提供任何示例，直接要求模型执行任务。适用于模型已经理解的简单、常见任务。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">请总结以下文本：
+[文本内容]</pre>
+            </div>
+            <div id="zero-shot-demo" class="interactive-demo"></div>
+          </div>
+        </div>
+
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/one-shot-icon.svg" alt="One-shot icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>单样本提示 (One-shot)</h3>
+            <p>提供一个示例，帮助模型理解任务需求。当任务需要特定格式或风格时特别有用。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">分类以下评论的情感：
+
+示例：
+评论：这家餐厅的服务太差了，等了一个小时才上菜。
+情感：负面
+
+评论：这部电影情节紧凑，演员表演出色。
+情感：</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/few-shot-icon.svg" alt="Few-shot icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>少样本提示 (Few-shot)</h3>
+            <p>提供多个示例，进一步帮助模型理解任务模式。对于复杂、非标准任务很有效。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">将以下句子翻译成法语：
+
+英语：Hello, how are you today?
+法语：Bonjour, comment allez-vous aujourd'hui?
+
+英语：I would like to order a coffee please.
+法语：Je voudrais commander un café s'il vous plaît.
+
+英语：Where is the nearest train station?
+法语：</pre>
+            </div>
+            <div id="few-shot-demo" class="interactive-demo"></div>
+          </div>
+        </div>
+        
+      </section>
+
+      <section id="advanced" class="animate-on-scroll">
+        <h2>高级提示技术</h2>
+        
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/system-icon.svg" alt="System prompting icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>系统提示 (System Prompting)</h3>
+            <p>定义模型的行为、能力和限制，通常作为对话的初始指令。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">系统：你是一位专业的天文学家，专注于太阳系和天体物理学。提供准确、深入的信息，并引用可靠的科学资料。
+
+用户：请介绍一下太阳系的形成过程。</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/role-icon.svg" alt="Role prompting icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>角色提示 (Role Prompting)</h3>
+            <p>要求模型扮演特定角色，从该角色的视角和知识背景回答问题。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">请你扮演一位经验丰富的财务顾问。分析以下情况并提供投资建议：
+
+我今年35岁，有10万美元可用于投资，希望在15年内为退休做准备。我的风险承受能力中等。</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="technique-card card-hover attention">
+          <div class="technique-icon">
+            <img src="img/cot-icon.svg" alt="Chain of thought icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>思维链 (Chain of Thought)</h3>
+            <p>鼓励模型分步骤思考问题，显示推理过程。特别适用于需要复杂推理的任务。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">请一步步解决这个数学问题，显示你的思考过程：
+
+如果一件衬衫原价80元，先打8折，然后又打75折，最终价格是多少？</pre>
+            </div>
+            <div id="cot-demo" class="interactive-demo"></div>
+            <a href="chain-of-thought.html" class="learn-more-btn">了解更多 →</a>
+          </div>
+        </div>
+
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/stepback-icon.svg" alt="Step-back icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>回溯提示 (Step-back Prompting)</h3>
+            <p>先退一步思考更基础的概念或知识，再解决具体问题。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">在回答以下问题前，请先考虑相关的基础理论和原则：
+
+为什么在大型飞机上，引擎通常安装在机翼下方而不是机翼上方？</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="special" class="animate-on-scroll">
+        <h2>专业应用</h2>
+        
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/code-icon.svg" alt="Code prompting icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>代码提示 (Code Prompting)</h3>
+            <p>针对编程和代码相关任务的特定提示技术。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">用Python编写一个函数，它可以接受一个整数列表，并返回列表中所有偶数的和。
+请包含详细注释解释代码的工作原理。</pre>
+            </div>
+            <div class="code-demo">
+              <div class="code-tabs">
+                <button class="tab-btn active" data-tab="write">编写代码</button>
+                <button class="tab-btn" data-tab="explain">解释代码</button>
+                <button class="tab-btn" data-tab="debug">调试代码</button>
+              </div>
+              <div class="tab-content" id="write-tab">
+                <pre class="code-example">
+def sum_even_numbers(numbers):
+    """
+    计算列表中所有偶数的和
+    
+    参数:
+        numbers (list): 整数列表
+        
+    返回:
+        int: 所有偶数的总和
+    """
+    # 初始化总和为0
+    total = 0
+    
+    # 遍历列表中的每个数字
+    for num in numbers:
+        # 检查数字是否为偶数(除以2的余数为0)
+        if num % 2 == 0:
+            # 如果是偶数，将其加到总和中
+            total += num
+            
+    # 返回偶数总和
+    return total
+
+# 测试函数
+test_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+result = sum_even_numbers(test_list)
+print(f"列表{test_list}中的偶数和为: {result}")  # 输出: 列表[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]中的偶数和为: 30</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="technique-card card-hover">
+          <div class="technique-icon">
+            <img src="img/react-icon.svg" alt="ReAct icon" class="float">
+          </div>
+          <div class="technique-content">
+            <h3>ReAct (Reason & Act)</h3>
+            <p>结合推理和行动，让模型边思考边执行任务。</p>
+            <div class="example">
+              <h4>示例：</h4>
+              <pre class="prompt-box">你是一个智能助手，需要边思考边行动解决问题。
+任务：找出2023年世界上人口最多的三个城市。
+
+按以下格式回答：
+思考：[你的分析过程]
+行动：[需要执行的操作，例如搜索信息]
+观察：[执行操作后得到的结果]
+... (重复思考-行动-观察循环)
+回答：[最终答案]</pre>
+            </div>
+            <div class="react-animation">
+              <div class="react-cycle">
+                <div class="react-step" id="react-think">思考</div>
+                <div class="react-arrow">→</div>
+                <div class="react-step" id="react-act">行动</div>
+                <div class="react-arrow">→</div>
+                <div class="react-step" id="react-observe">观察</div>
+                <div class="react-arrow react-return">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="best-practices" class="animate-on-scroll">
+        <h2>最佳实践</h2>
+        <div class="practices-grid">
+          <div class="practice-item card-hover stagger-item stagger-1">
+            <div class="practice-icon">📝</div>
+            <h3>提供示例</h3>
+            <p>当期望特定格式或风格的输出时，提供具体示例会提高成功率。</p>
+          </div>
+          <div class="practice-item card-hover stagger-item stagger-2">
+            <div class="practice-icon">🔍</div>
+            <h3>简洁设计</h3>
+            <p>保持提示词简洁明了，避免不必要的复杂性。</p>
+          </div>
+          <div class="practice-item card-hover stagger-item stagger-3">
+            <div class="practice-icon">📋</div>
+            <h3>具体说明输出要求</h3>
+            <p>明确指定所需的输出格式、长度和风格。</p>
+          </div>
+          <div class="practice-item card-hover stagger-item stagger-4">
+            <div class="practice-icon">✅</div>
+            <h3>使用指令而非约束</h3>
+            <p>使用积极的指令而不是消极的约束，引导模型朝正确方向思考。</p>
+          </div>
+          <div class="practice-item card-hover stagger-item stagger-5">
+            <div class="practice-icon">📏</div>
+            <h3>控制最大令牌长度</h3>
+            <p>考虑模型的上下文窗口限制，避免过长提示。</p>
+          </div>
+          <div class="practice-item card-hover stagger-item stagger-6">
+            <div class="practice-icon">🔄</div>
+            <h3>在提示中使用变量</h3>
+            <p>使用变量和模板创建可复用的提示结构。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="playground" class="animate-on-scroll">
+        <h2>提示词实验场</h2>
+        <p>在这里尝试不同的提示词技术，探索它们如何影响输出结果。</p>
+
+        <div class="technique-card">
+          <div class="technique-header">
+            <h3>常见任务提示词模板</h3>
+          </div>
+          <div class="technique-content">
+            <div class="tab-container">
+              <div class="tabs">
+                <button class="tab active" data-tab="summarization">摘要生成</button>
+                <button class="tab" data-tab="classification">分类任务</button>
+                <button class="tab" data-tab="generation">创意写作</button>
+                <button class="tab" data-tab="extraction">信息提取</button>
+              </div>
+              
+              <div class="tab-content active" id="summarization">
+                <h4>文本摘要模板</h4>
+                <pre class="prompt-box">请将以下{文本类型}总结为{字数限制}字的摘要，包含以下几个方面：{重点1}、{重点2}、{重点3}。确保摘要保留原文的关键信息，同时使用{风格要求}的语言风格。
+
+文本内容：
+{文本内容}
+
+注意：生成的摘要应该是完整的段落，而不仅仅是要点列表。</pre>
+                
+                <div class="prompt-example-item">
+                  <div class="prompt-example-header">
+                    <h4>实际应用例子</h4>
+                  </div>
+                  <div class="prompt-container">
+                    <div class="prompt-input">请将以下研究论文摘要总结为200字以内的摘要，包含以下几个方面：研究目的、方法论、主要发现。确保摘要保留原文的关键信息，同时使用简洁客观的语言风格。
+
+文本内容：
+近年来，地球气温上升导致极端天气事件频发，对全球粮食安全构成了严重威胁。本研究通过分析1990-2020年间全球157个国家的气象数据和农作物产量记录，评估了气候变化对主要农作物产量的影响。研究采用多变量回归分析和机器学习模型相结合的方法，控制了土壤条件、农业技术和经济因素等变量。结果表明，全球气温每上升1℃，小麦、玉米和水稻的平均产量分别下降6.4%、7.2%和3.5%。研究还发现，发展中国家的农作物产量受气候变化的影响更为显著，这可能加剧全球粮食分配不平等。通过情景分析，研究预测了不同减排路径下2050年的全球粮食生产状况，并提出了一系列适应性农业策略，包括开发耐热作物品种和改进灌溉系统等。本研究强调了气候行动与粮食安全之间的紧密联系，为政策制定者提供了科学依据。</div>
+                    <div class="prompt-output"><strong>有效摘要：</strong>
+此研究评估气候变化对全球粮食安全的影响，通过分析1990-2020年间157国的气象与农作物数据。采用多变量回归和机器学习方法，控制土壤、技术和经济因素。结果显示全球气温每升高1℃，小麦、玉米和水稻产量分别下降6.4%、7.2%和3.5%，发展中国家影响更显著。研究预测了2050年不同减排路径下的粮食生产状况，并提出开发耐热作物和改进灌溉等适应策略，为政策制定提供科学依据，强调气候行动与粮食安全的紧密联系。</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-content" id="classification">
+                <h4>文本分类模板</h4>
+                <pre class="prompt-box">请将以下{文本类型}分类为以下类别之一：{类别1}、{类别2}、{类别3}...。
+分析时请考虑以下因素：{因素1}、{因素2}、{因素3}...
+
+对于你的分类，请提供一个简短的解释，说明你为什么选择这个类别。
+
+文本：
+{文本内容}</pre>
+
+                <div class="prompt-example-item">
+                  <div class="prompt-example-header">
+                    <h4>实际应用例子</h4>
+                  </div>
+                  <div class="prompt-container">
+                    <div class="prompt-input">请将以下客户反馈分类为以下类别之一：产品质量、用户体验、价格、服务态度、配送问题。
+分析时请考虑以下因素：客户的具体描述、情感倾向、提到的产品或服务具体方面。
+
+对于你的分类，请提供一个简短的解释，说明你为什么选择这个类别。
+
+文本：
+"我上周买的这款手机确实外观很漂亮，系统也很流畅，但是电池续航实在太差了，才用了三天就开始一天要充两次电。而且充电速度也不如广告宣传的那么快。其他方面都还不错，就是这个电池问题真的很影响使用体验。"</div>
+                    <div class="prompt-output"><strong>分类结果：</strong>
+
+类别：产品质量
+
+解释：该反馈主要集中在手机电池续航问题上，这属于产品质量范畴。客户明确指出"电池续航实在太差"，并且充电速度不符合广告宣传，这些都是产品本身物理特性的缺陷，而非软件界面或使用流程等用户体验问题。虽然客户也提到了这个问题"影响使用体验"，但根本原因是电池这一硬件组件的性能问题，因此最适合归类为产品质量问题。</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-content" id="generation">
+                <h4>创意写作模板</h4>
+                <pre class="prompt-box">请以"{主题}"为主题，创作一篇{体裁}。
+风格要求：{风格描述}
+长度：约{字数}字
+应包含的元素：{元素1}、{元素2}、{元素3}...
+目标受众：{受众描述}
+
+其他要求：{特定要求}</pre>
+
+                <div class="prompt-example-item">
+                  <div class="prompt-example-header">
+                    <h4>实际应用例子</h4>
+                  </div>
+                  <div class="prompt-container">
+                    <div class="prompt-input">请以"人工智能与创造力"为主题，创作一篇短篇故事。
+风格要求：科幻但温暖人心，略带哲理思考
+长度：约800字
+应包含的元素：一位艺术家、一个AI助手、一次创作危机、一个出人意料的转折
+目标受众：对科技和艺术都感兴趣的年轻专业人士
+
+其他要求：故事应该既展现技术的可能性，也探讨人类创造力的独特价值</div>
+                    <div class="prompt-output">[故事输出将显示在这里]</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-content" id="extraction">
+                <h4>信息提取模板</h4>
+                <pre class="prompt-box">请从以下{文本类型}中提取这些关键信息：
+{信息项1}
+{信息项2}
+{信息项3}
+...
+
+以JSON格式输出结果，确保每个字段都有值。如果信息不存在，请标记为"未提供"。
+
+文本：
+{文本内容}</pre>
+
+                <div class="prompt-example-item">
+                  <div class="prompt-example-header">
+                    <h4>实际应用例子</h4>
+                  </div>
+                  <div class="prompt-container">
+                    <div class="prompt-input">请从以下招聘信息中提取这些关键信息：
+公司名称
+职位名称
+工作地点
+薪资范围
+必备技能
+学历要求
+工作经验
+联系方式
+
+以JSON格式输出结果，确保每个字段都有值。如果信息不存在，请标记为"未提供"。
+
+文本：
+深圳智能科技有限公司诚聘机器学习工程师，负责我们的计算机视觉算法开发与优化。要求应聘者具有计算机科学或相关专业硕士及以上学历，3年以上相关工作经验，精通Python和TensorFlow/PyTorch，有强大的算法设计和问题解决能力。熟悉OpenCV、图像处理技术是加分项。薪资范围25K-35K/月，14薪，提供具有竞争力的期权激励。工作地点：深圳南山区科技园。有意者请将简历发送至hr@sztech.com.cn。</div>
+                    <div class="prompt-output">```json
+{
+  "公司名称": "深圳智能科技有限公司",
+  "职位名称": "机器学习工程师",
+  "工作地点": "深圳南山区科技园",
+  "薪资范围": "25K-35K/月，14薪",
+  "必备技能": "Python, TensorFlow/PyTorch, 算法设计, 问题解决能力",
+  "学历要求": "计算机科学或相关专业硕士及以上",
+  "工作经验": "3年以上相关工作经验",
+  "联系方式": "hr@sztech.com.cn"
+}
+```</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h4>如何使用这些模板</h4>
+          <p>1. 选择适合你任务的基础模板</p>
+          <p>2. 用具体信息替换大括号{}中的变量</p>
+          <p>3. 根据你的具体需求增加或删除元素</p>
+          <p>4. 观察结果并迭代改进提示词</p>
+          <p><strong>提示：</strong>最有效的提示词往往是经过多次调整的结果。请记录哪些修改带来了改进，以建立自己的最佳实践库。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>关于本项目</h3>
+          <p>提示词工程学习网站是一个开源教育项目，旨在帮助人们学习和掌握提示词设计技术。</p>
+          <p>该项目基于Prompt Engineering文档创建，专注于教育内容和提示词结构展示。</p>
+        </div>
+        <div class="footer-section">
+          <h3>相关资源</h3>
+          <ul>
+            <li><a href="https://github.com/Yuzc-001/prompt-engineering-learn" target="_blank">GitHub 仓库</a></li>
+            <li><a href="chain-of-thought.html">思维链详解</a></li>
+            <li><a href="techniques-comparison.html">技术比较页面</a></li>
+            <li><a href="advanced-techniques.html#tot">思维树详解</a></li>
+            <li><a href="contribute.html">贡献指南</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>联系我们</h3>
+          <p>如有任何问题或建议，请在GitHub上提交Issue或Pull Request。</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p> 2025 Prompt Engineering Learn | <a href="https://github.com/your-username/prompt-engineering-learn/blob/main/LICENSE" target="_blank">MIT </a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 确保主内容可见
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.display = 'block';
+        mainElement.style.visibility = 'visible';
+        mainElement.style.opacity = '1';
+      }
+      
+      // 确保所有内容部分可见
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'block';
+        section.style.visibility = 'visible';
+        section.style.opacity = '1';
+      });
+    });
+  </script>
+  <script src="js/prompt-demo.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

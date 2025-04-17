@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>思维链技术</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/cot-visualizer.css">
+  <link rel="stylesheet" href="css/styles-new.css">
+  <link rel="stylesheet" href="css/warm-theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="gradient-animate">
+    <div class="container">
+      <h1 class="typewriter">思维链技术</h1>
+      <p class="fade-in">通过分步骤思考过程增强大语言模型的推理能力</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section id="intro" class="animate-on-scroll">
+        <h2>什么是思维链 (Chain of Thought)</h2>
+        
+        <div class="intro-content">
+          <div class="text-content">
+            <p>思维链是一种提示工程技术，通过引导语言模型<strong>逐步推理</strong>来解决复杂问题。与直接要求模型给出答案不同，思维链技术鼓励模型像人类一样，展示完整的思考过程，从而产生更准确、更可靠的结果。</p>
+            
+            <div class="highlight-box">
+              <h3>核心原理</h3>
+              <p>思维链的核心在于让模型<strong>显式展示推理过程</strong>，而不仅仅是最终答案。这种方法最早由Google和斯坦福大学的研究人员在2022年提出，显著改进了大语言模型在数学、逻辑和复杂推理任务上的表现。</p>
+            </div>
+          </div>
+          
+          <div class="image-container">
+            <img src="img/cot-diagram.svg" alt="思维链过程图示" class="feature-image">
+          </div>
+        </div>
+        
+        <div class="key-benefits">
+          <h3>思维链技术的关键优势</h3>
+          <div class="benefits-container">
+            <div class="benefit-item">
+              <div class="benefit-icon">📈</div>
+              <h4>提高准确率</h4>
+              <p>研究表明，在数学问题上，使用思维链可将准确率提高20-40%。</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🔍</div>
+              <h4>增强透明度</h4>
+              <p>显式推理步骤使模型决策过程更透明，便于检查和调试。</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🧩</div>
+              <h4>处理复杂问题</h4>
+              <p>通过分解复杂问题，模型能够处理需要多步骤思考的任务。</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">⚙️</div>
+              <h4>减少逻辑错误</h4>
+              <p>降低了模型在推理过程中犯错的可能性，尤其是在多步骤计算中。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples" class="animate-on-scroll">
+        <h2>思维链实例详解</h2>
+        
+        <div class="examples-tabs">
+          <div class="tabs">
+            <button class="tab active" data-tab="math">数学推理</button>
+            <button class="tab" data-tab="logic">逻辑问题</button>
+            <button class="tab" data-tab="ethics">伦理决策</button>
+            <button class="tab" data-tab="coding">编程思考</button>
+          </div>
+          
+          <div class="tab-contents">
+            <div class="tab-content active" id="math-content">
+              <h3>数学推理示例</h3>
+              <div class="example-container">
+                <div class="example-problem">
+                  <h4>问题</h4>
+                  <p>一个水箱每分钟流入8升水，同时每分钟流出5升水。如果水箱初始有20升水，问多久后水箱会有50升水？</p>
+                </div>
+                
+                <div class="example-cot">
+                  <h4>思维链解答</h4>
+                  <div class="thinking-steps">
+                    <div class="step">
+                      <span class="step-number">1</span>
+                      <p>首先，我要确定水箱中水量的净变化率。每分钟流入8升，流出5升，所以净流入率是 8 - 5 = 3 升/分钟。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">2</span>
+                      <p>初始水量是20升，目标水量是50升，所以需要增加 50 - 20 = 30 升水。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">3</span>
+                      <p>如果每分钟净增加3升水，那么增加30升水需要的时间是 30 ÷ 3 = 10 分钟。</p>
+                    </div>
+                    <div class="step conclusion">
+                      <p>因此，水箱将在10分钟后达到50升水。</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="example-analysis">
+                  <h4>为什么思维链有效？</h4>
+                  <p>在这个例子中，思维链帮助模型：</p>
+                  <ul>
+                    <li>清晰识别问题中的关键变量（流入率、流出率、初始水量、目标水量）</li>
+                    <li>正确计算净变化率</li>
+                    <li>逐步应用数学关系</li>
+                    <li>避免计算错误</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-content" id="logic-content">
+              <h3>逻辑推理示例</h3>
+              <div class="example-container">
+                <div class="example-problem">
+                  <h4>问题</h4>
+                  <p>一个岛上有两类居民：诚实居民总是说真话，说谎居民总是说假话。你遇到三个居民A、B和C。A说"我和B是同一类居民"。B说"A和C是不同类型的居民"。C说"我是一个说谎者"。请确定每个人的身份。</p>
+                </div>
+                
+                <div class="example-cot">
+                  <h4>思维链解答</h4>
+                  <div class="thinking-steps">
+                    <div class="step">
+                      <span class="step-number">1</span>
+                      <p>首先，我们知道C说"我是一个说谎者"。如果C是诚实的，那么他说的话应该是真的，即他是说谎者。但这是矛盾的，因为诚实的人不能是说谎者。因此，C必须是说谎者。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">2</span>
+                      <p>既然C是说谎者，那么B的陈述"A和C是不同类型的居民"意味着什么？如果B说的是真话，那么A就是诚实的（因为C是说谎者）。如果B是说谎者，那么A和C是同类型，也就是说A也是说谎者。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">3</span>
+                      <p>现在看A的陈述："我和B是同一类居民"。如果A是诚实的，那么B也必须是诚实的。这与前面的推论一致：如果B是诚实的，那么A也是诚实的。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">4</span>
+                      <p>让我们检查另一种可能性：如果A是说谎者，那么A和B不是同一类，也就是说B是诚实的。但如果B是诚实的，那么A必须是诚实的（根据步骤2），这与假设矛盾。</p>
+                    </div>
+                    <div class="step conclusion">
+                      <p>因此，A和B都是诚实居民，C是说谎居民。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-content" id="ethics-content">
+              <h3>伦理决策示例</h3>
+              <div class="example-container">
+                <div class="example-problem">
+                  <h4>问题</h4>
+                  <p>一家公司发现其产品可能存在安全隐患，但召回会造成巨大经济损失，且问题出现的几率很小。该公司应该如何做出平衡安全和经济考虑的决定？</p>
+                </div>
+                
+                <div class="example-cot">
+                  <h4>思维链解答</h4>
+                  <div class="thinking-steps">
+                    <div class="step">
+                      <span class="step-number">1</span>
+                      <p>首先，我需要考虑所有相关的伦理原则：消费者安全、诚信、企业责任和经济影响。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">2</span>
+                      <p>安全隐患的严重性：我需要评估问题可能造成的伤害程度。即使几率很小，如果潜在伤害严重（如致命风险），那么保护消费者安全应该是首要考虑。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">3</span>
+                      <p>透明度和长期信任：隐瞒问题可能在短期内避免经济损失，但一旦问题被发现（特别是如果导致了伤害），公司将面临更严重的后果，包括声誉受损、法律诉讼和消费者信任丧失。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">4</span>
+                      <p>问题缓解选项：可能有比全面召回更有针对性的方法，例如提供免费检修、更新使用说明，或者只针对特定批次产品进行召回。</p>
+                    </div>
+                    <div class="step conclusion">
+                      <p>综合考虑，尽管存在经济损失，但公司应该公开透明地处理潜在安全隐患，制定最能减轻消费者风险的计划，同时寻找减少经济影响的方法。长期来看，保护消费者安全和维护公司诚信比短期经济利益更重要。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-content" id="coding-content">
+              <h3>编程思考示例</h3>
+              <div class="example-container">
+                <div class="example-problem">
+                  <h4>问题</h4>
+                  <p>用Python编写一个函数，找出列表中出现次数最多的元素。如果有多个元素出现次数相同且最多，返回所有这些元素。</p>
+                </div>
+                
+                <div class="example-cot">
+                  <h4>思维链解答</h4>
+                  <div class="thinking-steps">
+                    <div class="step">
+                      <span class="step-number">1</span>
+                      <p>首先，我需要计算列表中每个元素出现的次数。这可以使用Python的Counter类或构建字典来实现。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">2</span>
+                      <p>接下来，我需要找出最大出现次数是多少。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">3</span>
+                      <p>然后，我需要找出所有出现次数等于这个最大值的元素。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">4</span>
+                      <p>最后，将这些元素作为列表返回。</p>
+                    </div>
+                    <div class="step">
+                      <span class="step-number">5</span>
+                      <p>下面是具体实现：</p>
+                      <pre><code class="language-python">from collections import Counter
+
+def most_frequent(lst):
+    # 使用Counter计算每个元素的出现次数
+    counts = Counter(lst)
+    
+    # 找出最大出现次数
+    max_count = max(counts.values())
+    
+    # 返回所有出现次数等于最大值的元素
+    return [item for item, count in counts.items() if count == max_count]
+
+# 测试
+print(most_frequent([1, 2, 2, 3, 3, 3, 4, 4, 4]))  # 输出: [3, 4]
+print(most_frequent(['a', 'b', 'a', 'c', 'b']))    # 输出: ['a', 'b']</code></pre>
+                    </div>
+                    <div class="step conclusion">
+                      <p>这个解决方案使用了Counter类来高效计算频率，并返回所有最频繁出现的元素。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>关于本项目</h3>
+          <p>提示词工程学习网站是一个开源教育项目，旨在帮助人们学习和掌握提示词设计技术。</p>
+        </div>
+        <div class="footer-section">
+          <h3>相关资源</h3>
+          <ul>
+            <li><a href="https://github.com/Yuzc-001/prompt-engineering-learn" target="_blank">GitHub 仓库</a></li>
+            <li><a href="chain-of-thought.html">思维链详解</a></li>
+            <li><a href="techniques-comparison.html">技术比较页面</a></li>
+            <li><a href="advanced-techniques.html#tot">思维树详解</a></li>
+            <li><a href="contribute.html">贡献指南</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>联系我们</h3>
+          <p>如有任何问题或建议，请在GitHub上提交Issue或Pull Request。</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p> 2025 Prompt Engineering Learn | MIT </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/cot-visualizer.js"></script>
+  <script>
+    // 确保DOM完全加载
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM fully loaded');
+      
+      // 强制显示主要内容
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.display = 'block';
+        mainElement.style.visibility = 'visible';
+        mainElement.style.opacity = '1';
+        console.log('Main content visibility forced');
+      }
+
+      // 确保所有部分可见
+      const sections = document.querySelectorAll('section');
+      sections.forEach(function(section, index) {
+        section.style.display = 'block';
+        section.style.visibility = 'visible';
+        section.style.opacity = '1';
+        console.log('Section ' + index + ' visibility forced');
+      });
+      
+      // 选项卡功能
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // 移除所有激活状态
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // 添加当前选中项的激活状态
+          tab.classList.add('active');
+          const target = tab.getAttribute('data-tab');
+          document.getElementById(target + '-content').classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
